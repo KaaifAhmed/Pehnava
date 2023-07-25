@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Lato:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap');
+
+
+:root {
+    --font-1--: 'Lato', sans-serif;
+    --font-2--: 'Lato', sans-serif;
+    --color-1--: peachpuff;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: var(--font-1--);
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+}
+
+.information {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 4rem;
+    /* gap: 1rem; */
+}
+
+.information > .info-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.information > .info-head > .logo {
+    font-size: 2.5rem;
+    font-weight: 600;
+    font-family: 'Cinzel', serif;
+    /* color: var(--color-1--); */
+}
+
+.information > .info-head > .links {
+    display: flex;
+    gap: 10px;
+}
+
+.information > .info-head > .links > a {
+    text-decoration: none;
+    color: black;
+}
+
+.information > .info-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 1rem 0;
+}
+
+.information > .info-form > .form-head {
+    font-size: 1.3rem;
+    margin: 1rem 0 1rem 0;
+    font-weight: 500;
+}
+
+.information > .info-form > input {
+    padding: 1rem 0.9rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.information > .info-form > input:focus {
+    outline: none;
+    border: 2px solid gray;
+}
+
+.information > .info-form  input[type="radio"] {
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: black;
+    width: 1rem;
+    height: 1rem;
+    border: 0.4rem solid black;
+    border-radius: 50%;
+}
+
+.information > .info-form > label {
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.information > .info-form > .radio-label {
+    line-height: 1.1;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 1rem;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 1rem 0.9rem;
+}
+
+.information > .info-form > button {
+    padding: 1rem 2rem;
+    background-color: black;
+    border: none;
+    border-radius: 8px;
+    width: fit-content;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: white;
+}
+
+
+
+
+.purchases {
+    background-color: rgb(241, 241, 241);
+    border-left: 1px solid lightgray;
+    position: fixed;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    /* gap: 1rem; */
+}
+
+.items {
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    /* gap: 1rem; */
+}
+
+.items > .item {
+    display: flex;
+    gap: 1rem;
+    position: relative;
+    padding: 1rem 0.5rem;
+}
+
+.items > .item > .item-badge {
+    background-color: #5f5f5f;
+    padding: 6px 8px;
+    border-radius: 2rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 10px;
+    color: white;
+}
+
+.items > .item > img {
+    width: 3rem;
+    padding: 0px 8px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.items > .item > .item-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.items > .item > .item-detail > .item-name {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.items > .item > .item-detail > .item-price {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.items > .pricing {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1rem 5px;
+}
+
+.items > .pricing > span {
+    display: flex;
+    justify-content: space-between;
+}
+
+.items > .pricing > .subtotal {
+    border-top: 1px solid lightgray;
+    padding: 1rem 0;
+}
+
+.items > .pricing > .total {
+    border-top: 1px solid lightgray;
+    padding: 1rem 0;
+    margin-top: 1rem;
+}
+
+.items > .pricing > .total > h6 {
+    font-size: 1.2rem;
+}
+
+.items > .pricing > span > p {
+    font-weight: 400;
+    color: rgb(95, 95, 95);
+}
+
+.items > .pricing > span > h6 {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: rgb(78, 78, 78);
+}
+
+
+@media only screen and (max-width: 800px) {
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .information {
+        padding: 3rem 1.5rem;
+    }
+
+    .purchases {
+        position: static;
+        width: 100%;
+    }
+
+    .items {
+        padding: 3rem 1.5rem;
+    }
+
+
+}
+

@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Lato:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap');
+
+
+:root {
+    --font-1--: 'Lato', sans-serif;
+    --font-2--: 'Lato', sans-serif;
+    --color-1--: peachpuff;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-1--);
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.navBar {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 100%;
+    height: fit-content;
+}
+
+.navBar-top {
+    background-color: var(--color-1--);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+    font-family: var(--font-2--);
+}
+
+.navBar > .navBar-main {
+    /* width: 100%; */
+    padding: 1.2rem 3.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navBar > .navBar-main > .nav-logo {
+    /* width: 10%; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.navBar > .navBar-main > .nav-logo > .logo{
+    display: none;
+    width: 3.8rem;
+    height: 3.8rem;
+    background-color: black;
+    border-radius: 1.9rem;
+}
+
+.navBar > .navBar-main > .nav-logo > .logo-name{
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: 'Cinzel', serif;
+    cursor: pointer;
+    /* color: var(--secondary-color--); */
+}
+.navBar > .navBar-main > .nav-logo > .logo-name:hover {
+    color: var(--color-1--);
+
+}
+
+.navBar > .navBar-main > .nav-links {
+    /* width: 25%; */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: var(--whitez--);
+    gap: 1.5rem;
+    font-size: 1rem;
+    font-family: var(--font-1--);
+}
+
+.navBar > .navBar-main > .nav-links > .link {
+    text-decoration: none;
+    color: var(--white--);
+    transition: all 100ms ease-out;
+}
+
+.navBar > .navBar-main > .nav-links > .link:hover {
+    filter: sepia(1) brightness(2.6);
+    cursor: pointer;
+}
+
+.link_dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.link_dropdown--options {
+    display: none;
+    position: absolute;
+}
+
+.link_dropdown:hover .link_dropdown--options {
+    display: block !important;
+}
+
+.navBar > .navBar-main > .nav-links > .btn {
+    background-color: transparent;
+    color: var(--secondary-color--);
+    border: 2px solid var(--secondary-color--);
+    border-radius: 6px;
+    padding: 0.5rem 1.5rem;
+    font-size: 14;
+    font-weight: 600;
+    transition: all 300ms ease-in-out;
+}
+
+.navBar > .navBar-main > .nav-links > .btn:hover {
+    background-color: var(--secondary-color--);
+    color: var(--white--);
+}
+
+.nav-hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 3px;
+    background-color: var(--secondary-color--);
+    margin: 8px 0;
+    transition: 0.4s;
+}
+
+.search {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 200ms ease-in-out;
+}
+
+.search > h5 {
+    font-size: 1.2rem;
+}
+
+.search > .search-cross {
+    font-size: 1.2rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
+.search > .searchBar {
+    display: flex;
+    justify-content: space-between;
+    width: fit-content;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
+.search > .searchBar > .searchBar-inp {
+    width: 95%;
+    border: none;
+    padding: 1rem 0;
+    font-size: 1rem;
+}
+
+.search > .searchBar > .searchBar-inp:focus {
+    border: none;
+    outline: none;
+}
+
+.search > .searchBar > .searchBar-btn {
+    /* width: 20%; */
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+
+
+/* Footer */
+
+footer {
+    padding: 2.5rem 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-1--);
+    color: black;
+    gap: 1rem;
+    width: 100%;
+    
+    z-index: 2;
+}
+
+.footer_top {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 1rem;
+}
+
+.footer_about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    width: 25rem;
+}
+
+.footer_about--logo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    font-family: 'Cinzel', serif;
+}
+
+.footer_links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.links_head {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-family: var(--font-1--);
+    font-weight: 700;
+}
+
+.footer_link {
+    color: var(--color-3--);
+    text-decoration: none;
+    font-family: var(--font-2--);
+
+}
+
+.footer_social {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+}
+
+.social_head {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-family: var(--font-1--);
+    font-weight: 700;
+}
+
+.social_icons {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.social_icon {
+    width: 1.5rem;
+    filter: invert(1);
+}
+
+hr {
+    width: 85%;
+    background-color: black;
+    height: 1px;
+    border: none;
+}
+
+.footer_contact {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+}
+
+.footer_contact--head {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-family: var(--font-1--);
+}
+
+.footer_contact--details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: var(--font-2--);
+    gap: 6px;
+}
+
+.footer_bottom {
+    font-family: var(--font-2--);
+}
+
+
+
+@media only screen and (max-width: 800px) {
+    .navBar-top {
+        font-size: 14px;
+        padding: 10px 0;
+    }
+
+    .navBar-main {
+        padding: 1rem 1.2rem !important;    
+    }
+
+    .search {
+        padding: 3rem 2rem;
+    }
+
+    footer {
+        padding: 1.5rem 1.2rem;
+    }
+
+    .footer_about {
+        width: fit-content;
+    }
+
+    .footer_top {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .links_head, .social_head, .footer_contact--head {
+        margin-bottom: 0.5rem;
+    }
+
+    footer hr {
+        width: 100%;
+    }
+}

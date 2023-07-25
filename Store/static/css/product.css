@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Lato:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap');
+
+
+:root {
+    --font-1--: 'Lato', sans-serif;
+    --font-2--: 'Lato', sans-serif;
+    --color-1--: peachpuff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.prodView {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 2rem;
+    padding: 2rem 1rem;
+
+    position: relative;
+    z-index: 1;
+    
+}
+
+.prodView > .product-image {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    gap: 0.5rem;
+    /* border: 1px solid black; */
+}
+/*--------------------------------------------------------------------------------*/
+/* < Ammendment by Abdullah > */
+
+.prodView > .product-image > #lens {
+    position: absolute;
+    width: 30rem;
+    background-repeat: no-repeat;
+    cursor: zoom-in;
+    
+}
+
+.none {
+    display: none;
+}
+.hidden {
+    visibility: hidden !important;
+
+}
+
+/* </ Ammendment by Abdullah > */
+/*--------------------------------------------------------------------------------*/
+
+
+.prodView > .product-image > .main-img {
+    width: 30rem;
+    
+    
+}
+
+.prodView > .product-image > .main-img:hover {
+    /* width: 30rem; */
+    
+}
+
+.prodView > .product-image > .images {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.prodView > .product-image > .images > img {
+    width: 100%;
+    cursor: pointer;
+}
+
+.prodView > #product-desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.8rem;
+    
+}
+
+.prodView > #product-desc > hr {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.prodView > #product-desc > .prod-name {
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-family: var(--font-1--);
+}
+
+.prodView > #product-desc > .prod-price {
+    font-size: 1.4rem;
+    margin: 8px 0;
+    font-weight: 500;
+    font-family: var(--font-2--);
+}
+
+.prodView > #product-desc > .prod-cat {
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--font-2--);
+}
+
+.prodView > #product-desc > .prod-stock {
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--font-2--);
+    color: limegreen;
+}
+
+.prodView > #product-desc > .prod-btns {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+    margin: 0.5rem 0;
+}
+
+.prodView > #product-desc > .prod-btns > .atc {
+    padding: 1rem 4rem;
+    border: none;
+    background-color: #000000;
+    color: white;
+    border-radius: 3rem;
+    font-weight: 600;
+    transition: all 250ms ease-in-out;
+}
+
+.prodView > #product-desc > .prod-btns > .atc:hover {
+    border: none;
+    background-color:  var(--color-1--);
+    color: black;
+    cursor: pointer;
+}
+
+.prodView > #product-desc > .prod-btns > .prod-quantity {
+    /* width: 8rem; */
+    padding: 0rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 1px solid lightgray;
+    font-weight: 600;
+    border-radius: 3rem;
+}
+
+.prodView > #product-desc > .prod-btns > .prod-quantity > button {
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    font-weight: 600;
+    transition: all 250ms ease-in-out;
+    padding: 6px;
+}
+
+
+/* Donot make tweaks here */
+.prodView > #product-desc > .prod-btns > .prod-quantity > button:hover {
+    cursor: pointer;
+    /* color: var(--color-1--); */
+}
+.animatedButton:hover {
+    color: var(--color-1--);
+}
+
+.prodView > #product-desc > .prod-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 0.5rem;
+    gap: 1.5rem;
+}
+
+.prodView > #product-desc > #prod-details-mob {
+    display: none;
+}
+
+.prodView > #product-desc > .prod-details > .details-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    padding: 0 0.5rem;
+}
+
+.prodView > #product-desc > #prod-details-mob > .details-top {
+    display: flex;
+    text-align: center;
+    padding: 0 0.5rem;
+    background-color: rgb(245, 245, 245);
+    justify-content: center;
+    align-items: center;
+}
+
+.prodView > #product-desc > .prod-details > .details-top > .details-head {
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: var(--font-1--);
+    padding: 1rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.prodView > #product-desc > #prod-details-pc > .details-top > .details-head::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    transition: all 250ms ease-in-out;
+    background-color: var(--color-1--);
+}
+
+.prodView > #product-desc > #prod-details-pc > .details-top > .current-detail::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-1--);
+}
+
+.prodView > #product-desc > .prod-details > .details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.prodView > #product-desc > .prod-details > .details > p {
+    font-size: 1rem;
+}
+
+@media only screen and (max-width:545px) {
+    #lens {
+        display: none!important;
+        background: transparent !important;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .prodView {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .prodView > .product-image {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .prodView > .product-image > .images {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        width: 100%;
+    }
+
+    /* .prodView > .product-image > .images > img {
+        width: ;
+    } */
+
+    .prodView > .product-image > .main-img {
+        width: 100%;
+    }
+
+    .prodView > #product-desc > .prod-btns {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #prod-details-mob {
+        display: flex !important;
+    }
+
+    #prod-details-pc {
+        display: none !important;
+    }
+}
+
+/* COO's classes (high class COO) */
+
+#pr-qty {
+    display: hidden !important;
+}
+
