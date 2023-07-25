@@ -1,0 +1,381 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock style %}
+{% block middle %}
+<section class="pane">
+    <section class="contentofmain">
+        <div class="head">
+            <div class="heading">
+                <div style="position: relative; top: -40px;"><img src="{% static 'analytics.gif' %}" alt="" width="100"
+                        height="100"></div>
+                <div class="name" id="name">Product</div>
+            </div>
+            <div class="links">
+                <div>
+                    <p class="material-symbols-outlined">Settings</p>
+                </div>
+                <div>
+                    <p class="material-symbols-outlined">Search</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="Product-Vis-Section" class="segment" style="height: 100%;">
+
+            <div class="visuals">
+
+                <div class="sub-heading">Overview</div>
+                <!-- <div class="product-analyze">
+                <div>
+                    <p class="analyze-name"> Weekly Sales</p>
+                    <p class="analyze-figure">25</p>
+                </div>
+                <div>
+                    <p class="analyze-name"> Monthly Sales</p>
+                    <p class="analyze-figure">25</p>
+                </div>
+                <div>
+                    <p class="analyze-name"> Total Products</p>
+                    <p class="analyze-figure">25</p>
+                </div>
+                <div>
+                    <p class="analyze-name"> Out of Stock</p>
+                    <p class="analyze-figure">25</p>
+                </div>
+            </div> -->
+
+
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Imag</th>
+                            <th>Name</th>
+                            <th>Cateogry</th>
+                            <th>Stock</th>
+                            <th>Price</th>
+                            <th>Options</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+
+                        <tr>
+                            <td>{{product.id}}</td>
+                            <td>product.img</td>
+                            <td>{{product}}</td>
+                            <td>{{product.cat}}</td>
+                            {% if product.qty == 0 %}
+                            <td class="out-of-stock">
+                                <div>Out of stock</div>
+                            </td>
+                            {% else %}
+                            <td>{{product.qty}}</td>
+                            {% endif %}
+                            <td>{{product.price}}</td>
+                            <td class="material-symbols-outlined">change_circle</td>
+                        </tr>
+
+
+
+
+
+
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+
+
+        <div class="segment none" style="height: 100%; " id="Models-integration">
+
+            {% for one in all%}
+           
+
+            <div class="bar" id="{{one.first.html_id}}" onclick="expand('{{one.first.html_id}}desc')">
+                <div>
+                    <p>{{one.first.html_id}}</p>
+                    <p class="material-symbols-outlined">
+                        expand_circle_down 
+                        {% if one.first.html_id != 'Order'%}
+                        <span class="material-symbols-outlined" onclick="location.href='form/{{one.first.html_id}}'">add</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <div id="{{one.first.html_id}}desc" class="none">
+                {% for product in one %}
+
+                <div class="productdesc-items">
+
+                    <div class="">{{product}}</div>
+                    <div style="cursor:pointer !important;">
+                        <p class="material-symbols-outlined" onclick="location.href='alter/{{one.first.html_id}}_{{product.id}}'">change_circle</p>
+
+                        <p class="material-symbols-outlined" onclick="location.href='delete/{{one.first.html_id}}_{{product.id}}'">Delete</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% endfor %}
+
+
+
+
+
+
+            {% comment %} <div class="bar" id="Products">
+                <div>
+                    <p>Products</p>
+                    <p class="material-symbols-outlined">expand_circle_down <span class="material-symbols-outlined"
+                            onclick="location.href='form/Product'">add</span></p>
+                </div>
+            </div>
+
+            <div id="Productsdesc" class="none">
+                {% for product in products %}
+                <div class="productdesc-items">
+                    <div class="">{{product}}</div>
+                    <div>
+                        <p class="material-symbols-outlined">change_circle</p>
+                        <p class="material-symbols-outlined">Delete</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+
+
+
+            <div class="bar" id="Categories">
+                <div>
+                    <p>Categories</p>
+                    <p class="material-symbols-outlined">expand_circle_down <span class="material-symbols-outlined"
+                            onclick="location.href='form/Category'">add</span></p>
+                </div>
+            </div>
+            <div id="Categoriesdesc" class="none">
+                {% for cat in cats %}
+                <div class="productdesc-items">
+                    <div class="">{{cat}}</div>
+                    <div>
+                        <p class="material-symbols-outlined">change_circle</p>
+                        <p class="material-symbols-outlined">Delete</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+
+
+
+            <div class="bar" id="Navbar">
+                <div>
+                    <p>Navbar</p>
+                    <p class="material-symbols-outlined">expand_circle_down <span class="material-symbols-outlined"
+                            onclick="location.href='form/nav'">add</span></p>
+                </div>
+            </div>
+            <div id="Navbardesc" class="none">
+                {% for nav in navs %}
+                <div class="productdesc-items">
+                    <div class="">img {{forloop.counter}}</div>
+                    <div>
+                        <p class="material-symbols-outlined">change_circle</p>
+                        <p class="material-symbols-outlined">Delete</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+
+
+            <div class="bar" id="Order">
+                <div>
+                    <p>Order</p>
+                    <p class="material-symbols-outlined">expand_circle_down add</p>
+                </div>
+            </div>
+            <div id="Orderdesc" class="none">
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
+            </div>
+
+
+
+
+            <div class="bar" id="Images">
+                <div>
+                    <p>Images</p>
+                    <p class="material-symbols-outlined">expand_circle_down <span class="material-symbols-outlined"
+                            onclick="location.href='form/Images'">add</span></p>
+                </div>
+            </div>
+            <div id="Imagesdesc" class="none">
+                {% for img in imgs %}
+                {}
+                <div class="productdesc-items">
+                    <div class="">{{img}}</div>
+                    <div>
+                        <p class="material-symbols-outlined">change_circle</p>
+                        <p class="material-symbols-outlined">Delete</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+
+
+            <div class="bar" id="News">
+                <div>
+                    <p>News</p>
+                    <p class="material-symbols-outlined">expand_circle_down <span class="material-symbols-outlined"
+                            onclick="location.href='form/News'">add</span></p>
+                </div>
+            </div>
+            <div id="Newsdesc" class="none">
+                {% for one_news in news %}
+                <div class="productdesc-items">
+                    <div class="">{{one_news}}</div>
+                    <div>
+                        <p class="material-symbols-outlined">change_circle</p>
+                        <p class="material-symbols-outlined">Delete</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div> {% endcomment %}
+
+
+        </div>
+
+        <div class="segment none" id="Analytics">
+            Analytics
+        </div>
+
+        <div class="segment none" id="Orders">
+            <div class="visuals" style="height: 20%">
+
+                <div class="sub-heading" style="height: 40%;">Overview</div>
+
+
+
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Cart items(s)</th>
+                            <th>Name</th>
+                            <th>Town</th>
+                            <th>Payment</th>
+                            <th>Delivery</th>
+                            <th>Options</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td>{{order.cart}}</td>
+                            <td>{{order.firstname}}</td>
+                            <td>{{order.town}}</td>
+                            <td>{{order.payment}}</td>
+                            <td>{{order.delivery}}</td>
+                            <td class="material-symbols-outlined">change_circle</td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="segment none" id="Category">
+            <div class="visuals" style="height: 20%">
+
+                <div class="sub-heading" style="height: 40%;">Overview</div>
+
+
+
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Products</th>
+                            <th>Options</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cat in cats %}
+                        <tr>
+                            <td>{{cat.id}}</td>
+                            <td>product.img</td>
+                            <td>{{cat}}</td>
+                            <td>lol</td>
+                            <td class="material-symbols-outlined">change_circle</td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        
+
+        <div class="segment none" id="UI Config">
+            <div class="visuals" style="height: 20%">
+
+                <div class="sub-heading" style="height: 40%;">Overview</div>
+
+
+
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>UserName</th>
+                            <th>Email</th>
+                            <th>SuperUser</th>
+                            <th>Options</th>
+
+                        </tr>
+                    </thead>
+                    
+                        
+                </table>
+
+            </div>
+        </div>
+
+
+    </section>
+
+</section>
+{% endblock middle %}
+
+{% block js %}
+<script src="{% static 'script.js' %}"></script>
+{% endblock js %}

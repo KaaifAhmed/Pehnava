@@ -1,0 +1,1 @@
+If you delete a model, it gets subsequently deleted, it won't ask you for confirmation

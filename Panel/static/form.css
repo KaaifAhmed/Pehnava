@@ -1,0 +1,9 @@
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    margin-bottom: 20px;
+    /* border: 1px solid black; */
+}
+

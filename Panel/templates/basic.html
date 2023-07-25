@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    {% block style %}
+    {% endblock style %}
+</head>
+
+<body>
+    <section class="navigation">
+        <section class="pane">
+            <div class="contentofpane">
+                <div class="name">PEHNAWA</div>
+                <div class="options">
+                    <div>
+                        <p class="material-symbols-outlined">monitoring</p>
+                        <p class="optionnames" onclick="render('Analytics')">Analytics</p>
+                    </div>
+                    <div>
+                        <p class="material-symbols-outlined">precision_manufacturing</p>
+                        <p class="optionnames" onclick="render('Product-Vis-Section')">Product</p>
+                    </div>
+                    <div>
+                        <p class="material-symbols-outlined">Assignment</p>
+                        <p class="optionnames" onclick="render('Category')">Category</p>
+                    </div>
+                    <div>
+                        <p class="material-symbols-outlined">Architecture</p>
+                        <p class="optionnames" onclick="render('UI Config')">Accounts</p>
+                    </div>
+                    <div>
+                        <p class="material-symbols-outlined">draft_orders</p>
+                        <p class="optionnames" onclick="render('Orders')">Orders</p>
+                    </div>
+
+                </div>
+
+                <div class="logout" onclick="render('Models-integration')">Models</div>
+
+            </div>
+
+        </section>
+        {% block middle %}
+        {% endblock middle %}
+        <section class="pane">
+            <section class="contentofpane">
+
+
+                <div class="summary-head">
+                    <div class="name">Summary</div>
+                </div>
+
+
+
+
+            </section>
+
+        </section>
+
+
+    </section>
+</body>
+{% block js %}{% endblock js %}
+
+</html>
+
+<!-- https://cdn.sanity.io/images/ldtsy7j0/production/c25209523a46fa64b4cbad3cb69dba55d37a7378-1600x1200.webp?auto=format&q=100 -->

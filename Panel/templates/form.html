@@ -1,0 +1,47 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="{% static 'form.css' %}">
+{% endblock style %}
+
+{% block middle %}
+<div class="pane">
+
+    <section class="contentofmain">
+        <div class="head">
+            <div class="heading">
+                <div style="position: relative; top: -40px;">
+                    <img src="{% static 'analytics.gif' %}" alt="" width="100" height="100">
+                </div>
+                <div class="name" id="name">{{name}}</div>
+        </div>
+        <div class="links">
+            <div>
+                <p class="material-symbols-outlined">Settings</p>
+            </div>
+            <div>
+                <p class="material-symbols-outlined">Search</p>
+            </div>
+        </div>
+    </div>
+    {% if update %}
+    <form class="segment" action="/admin/alter/{{name}}_{{id}}" method="post" >
+        {% else %}
+    <form class="segment" action="/admin/form/{{name}}" method="post" >
+    {% endif %}
+        {% csrf_token %}
+        
+        {% for field in form %}
+        <div class="form-row">
+            <div class="form-name">{{field.name.upper}}</div>
+            <div class="form-content">{{field}}</div>
+        </div>
+        
+        {% endfor %}
+        <input type="submit" value="Save">
+    </form>
+</section>
+</div>
+
+{% endblock middle %}
