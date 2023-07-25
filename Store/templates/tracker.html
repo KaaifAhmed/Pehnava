@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% load tag %}
+
+{% block title %}Order Tracker{% endblock title %} 
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/search.css' %}" />
+{% endblock head %}
+
+
+{% block news %}
+<div class="navBar-top">
+    <p class="navBar-news">Free shipping on all orders above PKR 2000</p>
+    {{news}}
+</div>
+{% endblock news %}
+
+
+{% block main %}
+
+<section class="order">
+    <h1 class="order-check">&#10003;</h1>
+    <h5 class="order-head">Order Successful</h5>
+    <p class="order-info">Contact us at +92 330 8496238 for more info</p>
+    <p class="order-id">Order ID: {{order.id}}</p>
+    <p class="order-id">Order name: {{order.cart}}</p>
+</section>
+
+{% endblock main %}
+

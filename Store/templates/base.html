@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="cat.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+    {% block head %}{% endblock head %}
+  </head>
+  <body>
+    <header>
+      <nav class="navBar">
+        {% block news %}{% endblock news %}
+        
+        <div class="navBar-main">
+          <div class="nav-logo" type="button" onclick="location.href='..'">
+            <span class="logo"></span>
+            <h6 class="logo-name">Pehnava</h6>
+          </div>
+          <div class="nav-links">
+            <a class="link" id="search-link">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21.5344 20.4655L17.475 16.4155C18.9077 14.7098 19.6266 12.5169 19.4817 10.294C19.3369 8.07119 18.3394 5.99008 16.6975 4.48476C15.0555 2.97944 12.8958 2.16612 10.6688 2.21444C8.44175 2.26276 6.31934 3.16898 4.74422 4.7441C3.1691 6.31922 2.26288 8.44163 2.21456 10.6687C2.16624 12.8957 2.97956 15.0554 4.48488 16.6974C5.9902 18.3393 8.07131 19.3367 10.2941 19.4816C12.517 19.6265 14.7099 18.9076 16.4156 17.4749L20.4656 21.5343C20.609 21.6729 20.8006 21.7504 21 21.7504C21.1994 21.7504 21.391 21.6729 21.5344 21.5343C21.6752 21.3921 21.7542 21.2 21.7542 20.9999C21.7542 20.7998 21.6752 20.6077 21.5344 20.4655V20.4655ZM3.75002 10.8749C3.75002 9.46571 4.1679 8.08816 4.9508 6.91646C5.73371 5.74476 6.84648 4.83153 8.1484 4.29226C9.45033 3.75299 10.8829 3.61189 12.265 3.88681C13.6472 4.16173 14.9167 4.84032 15.9132 5.83677C16.9096 6.83322 17.5882 8.10277 17.8631 9.48488C18.138 10.867 17.9969 12.2996 17.4577 13.6015C16.9184 14.9034 16.0052 16.0162 14.8335 16.7991C13.6618 17.582 12.2842 17.9999 10.875 17.9999C8.98612 17.9974 7.17529 17.246 5.83963 15.9103C4.50397 14.5746 3.7525 12.7638 3.75002 10.8749V10.8749Z"
+                  fill="#414042"
+                  ></path>
+                </svg>
+              </a>
+              {% comment %} <a class="link" href="../tracker/"><svg width="24" height="17" viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.2594 6.24063V6.22187C23.2609 6.19958 23.2577 6.17723 23.25 6.15625V6.12812C23.25 6.10937 23.2406 6.09062 23.2406 6.07187V6.05313C23.2313 6.025 23.2313 6.00625 23.2219 5.97812H23.2125L21.9 2.69687C21.7901 2.41638 21.5978 2.17576 21.3485 2.00673C21.0991 1.8377 20.8044 1.74819 20.5031 1.75H17.2594V1C17.2594 0.801088 17.1804 0.610322 17.0397 0.46967C16.8991 0.329018 16.7083 0.25 16.5094 0.25H2.2594C1.86157 0.25 1.48004 0.408035 1.19874 0.68934C0.917435 0.970644 0.759399 1.35218 0.759399 1.75V12.25C0.759399 12.6478 0.917435 13.0294 1.19874 13.3107C1.48004 13.592 1.86157 13.75 2.2594 13.75H3.47815C3.64337 14.3953 4.01867 14.9673 4.54488 15.3757C5.07109 15.7842 5.71827 16.0059 6.3844 16.0059C7.05053 16.0059 7.69771 15.7842 8.22392 15.3757C8.75012 14.9673 9.12542 14.3953 9.29065 13.75H14.7281C14.8934 14.3953 15.2687 14.9673 15.7949 15.3757C16.3211 15.7842 16.9683 16.0059 17.6344 16.0059C18.3005 16.0059 18.9477 15.7842 19.4739 15.3757C20.0001 14.9673 20.3754 14.3953 20.5406 13.75H21.7594C22.1572 13.75 22.5388 13.592 22.8201 13.3107C23.1014 13.0294 23.2594 12.6478 23.2594 12.25V6.25V6.24063ZM20.5031 3.25L21.4031 5.5H17.2594V3.25H20.5031ZM15.7594 1.75V7.75H2.2594V1.75H15.7594ZM2.2594 9.25H15.7594V10.6562C15.2552 11.0646 14.894 11.6228 14.7281 12.25H9.29065C9.12542 11.6047 8.75012 11.0327 8.22392 10.6243C7.69771 10.2158 7.05053 9.99412 6.3844 9.99412C5.71827 9.99412 5.07109 10.2158 4.54488 10.6243C4.01867 11.0327 3.64337 11.6047 3.47815 12.25H2.2594V9.25ZM6.3844 14.5C6.08773 14.5 5.79772 14.412 5.55104 14.2472C5.30437 14.0824 5.11211 13.8481 4.99858 13.574C4.88505 13.2999 4.85534 12.9983 4.91322 12.7074C4.9711 12.4164 5.11396 12.1491 5.32374 11.9393C5.53352 11.7296 5.80079 11.5867 6.09176 11.5288C6.38274 11.4709 6.68434 11.5006 6.95843 11.6142C7.23251 11.7277 7.46678 11.92 7.6316 12.1666C7.79643 12.4133 7.8844 12.7033 7.8844 13C7.8844 13.3978 7.72636 13.7794 7.44506 14.0607C7.16376 14.342 6.78222 14.5 6.3844 14.5ZM17.6344 14.5C17.3377 14.5 17.0477 14.412 16.801 14.2472C16.5544 14.0824 16.3621 13.8481 16.2486 13.574C16.135 13.2999 16.1053 12.9983 16.1632 12.7074C16.2211 12.4164 16.364 12.1491 16.5737 11.9393C16.7835 11.7296 17.0508 11.5867 17.3418 11.5288C17.6327 11.4709 17.9343 11.5006 18.2084 11.6142C18.4825 11.7277 18.7168 11.92 18.8816 12.1666C19.0464 12.4133 19.1344 12.7033 19.1344 13C19.1344 13.3978 18.9764 13.7794 18.6951 14.0607C18.4138 14.342 18.0322 14.5 17.6344 14.5ZM21.7594 12.25H20.5406C20.3729 11.6066 19.9967 11.0368 19.4709 10.6298C18.9451 10.2227 18.2993 10.0013 17.6344 10C17.5089 10 17.3835 10.0094 17.2594 10.0281V7H21.7594V12.25Z" fill="#414042"></path>
+              </svg></a> {% endcomment %}
+          </div>
+          <div class="nav-hamburger" onclick="hamburger(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+          </div>
+        </div>
+      </nav>
+      {% block cat %}{% endblock cat %}
+      {% block header %}{% endblock header %}
+    </header>
+    <div class="search" id="search">
+      <p class="search-cross" id="search-cross">&#10005;</p>
+      <h5>What are you looking for?</h4>
+     
+        <form action="/search" method="get" class="searchBar">
+
+          <input placeholder="Search products, brands and more" type="text" class="searchBar-inp" name="-search" id='-search'>
+          <button id="search-btn" class="searchBar-btn" type="submit"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.5344 20.4655L17.475 16.4155C18.9077 14.7098 19.6266 12.5169 19.4817 10.294C19.3369 8.07119 18.3394 5.99008 16.6975 4.48476C15.0555 2.97944 12.8958 2.16612 10.6688 2.21444C8.44175 2.26276 6.31934 3.16898 4.74422 4.7441C3.1691 6.31922 2.26288 8.44163 2.21456 10.6687C2.16624 12.8957 2.97956 15.0554 4.48488 16.6974C5.9902 18.3393 8.07131 19.3367 10.2941 19.4816C12.517 19.6265 14.7099 18.9076 16.4156 17.4749L20.4656 21.5343C20.609 21.6729 20.8006 21.7504 21 21.7504C21.1994 21.7504 21.391 21.6729 21.5344 21.5343C21.6752 21.3921 21.7542 21.2 21.7542 20.9999C21.7542 20.7998 21.6752 20.6077 21.5344 20.4655V20.4655ZM3.75002 10.8749C3.75002 9.46571 4.1679 8.08816 4.9508 6.91646C5.73371 5.74476 6.84648 4.83153 8.1484 4.29226C9.45033 3.75299 10.8829 3.61189 12.265 3.88681C13.6472 4.16173 14.9167 4.84032 15.9132 5.83677C16.9096 6.83322 17.5882 8.10277 17.8631 9.48488C18.138 10.867 17.9969 12.2996 17.4577 13.6015C16.9184 14.9034 16.0052 16.0162 14.8335 16.7991C13.6618 17.582 12.2842 17.9999 10.875 17.9999C8.98612 17.9974 7.17529 17.246 5.83963 15.9103C4.50397 14.5746 3.7525 12.7638 3.75002 10.8749V10.8749Z" fill="#414042"></path>
+          </svg></button>
+        </form>
+      
+    </div>
+
+    <main>{% block main %}{% endblock main %}</main>
+
+    {% block script %}{% endblock script %}
+
+    <footer>
+        <div class="footer_top">
+            <div class="footer_about">
+                <h6 class="footer_about--logo">Pehnava</h6>
+                <div class="footer_about--slogan">
+                    We approach technology artistically and help your business thrive with
+                    innovation, cutting edge technology and consultation services.
+                </div>
+            </div>
+            {% comment %}
+              <div class="footer_links">
+                  <h5 class="links_head">Useful Links</h5>
+                  <a class="footer_link" href="./">Home</a>
+                  <a class="footer_link" href="services">Services</a>
+                  <a class="footer_link" href="/contact">Contact</a>
+              </div>
+            {% endcomment %}
+            <div class="footer_social">
+                <h5 class="social_head">Follow Us</h5>
+                <div class="social_icons">
+                    <img class="social_icon" src="https://freepngimg.com/download/whatsapp/77220-scalable-vector-graphics-logo-whatsapp-icon.png" alt="">
+
+                    <img class="social_icon" src="https://freepngimg.com/thumb/facebook/62544-zuckerberg-mark-computer-facebook-icons-png-image-high-quality.png" alt="">
+                    <img class="social_icon" src="https://freepngimg.com/thumb/logo/77364-instagram-icons-computer-black-logo-white-wine.png" alt="">
+                </div>
+            </div>
+            <div class="footer_contact">
+                <h5 class="footer_contact--head">Contact Us</h5>
+                <div class="footer_contact--details">
+                    <p>+92 321 2626865</p>
+                    <p>info@pehnavastore.com</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="footer_bottom">
+            <p class="copyrights">Pehnava 2023 &#169; powered by <a href="https://www.instagram.com/online.saga" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: var(--white--);">Online Saga</a></p>
+        </div>
+    </footer>
+
+  </body>
+  <script src="{% static 'js/base.js' %}"></script>
+  <script src="{% static 'js/category.js' %}"></script>
+</html>
