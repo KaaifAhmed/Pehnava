@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cart.css">
+    <title>Cart | Viselet</title>
+</head>
+
+<body>
+    <nav>
+        <li class="no-style border" id="menu"> ☰ MENU</li>
+        <div class="name">
+            <li class="no-style" id="main-name" onclick="window.location.href = '/prodview.html'">Prodview</li>
+            <div class="flex">
+                <li class="no-style">Contact us</li>
+                <li class="no-style">🍳</li>
+            </div>
+        </div>
+        <li class="no-style" id="lang">🌐 Lang EN-US</li>
+    </nav>
+
+    <ul>
+        <div class="nav-bar">
+            <li class="no-style" onclick="window.location.href = '/index.html'">Home</li>
+            <li class="no-style">About</li>
+            <li class="no-style">Tracker</li>
+            <li class="no-style" style="color: #2f4f4E;">Cateogaries</li>
+            <li class="no-style"  onclick="window.location.href = '/cart.html'">Cart</li>
+        </div>
+        <div class="button" style="color: #FEA500;">
+            Sign up
+        </div>
+    </ul>
+    <div style="height:5rem"></div>
+    <section class="cart">
+        <div class="items">
+            <div class="first2col head ">My Shopping Bag</div>
+            <div class="sec2col head "></div>
+            <div class="item"><img src="shirt.png" width="100" alt=""></div>
+            <div class="item">
+                <p class="font">Portable easy iron, casual branded yorefit shirt | imported from Malaysia hah just
+                    kidding</p>
+                <div class="more">
+
+                    <p class="">Size: 40 inch</p>
+                    <p>Color: salmon</p>
+                    <p>Qty: <span class="controll">+</span>1<span class="controll">-</span></p>
+                </div>
+            </div>
+            <div class="item price">90k</div>
+            <div class="item controll">🗑️</div>
+            <div class="item"><img src="shirt.png" width="100" alt=""></div>
+            <div class="item">
+                <p class="font">Portable easy iron, casual branded yorefit shirt | imported from Malaysia hah just
+                    kidding</p>
+                <div class="more">
+
+                    <p class="">Size 40 inch</p>
+                    <p>Color salmon</p>
+                    <p>Qty: <span class="controll">+</span>1<span class="controll">-</span></p>
+                </div>
+            </div>
+            <div class="item price">90k</div>
+            <div class="item controll">🗑️</div>
+            <div class="item"><img src="shirt.png" width="100" alt=""></div>
+            <div class="item">
+                <p class="font">Portable easy iron, casual branded yorefit shirt | imported from Malaysia hah just
+                    kidding</p>
+                <div class="more">
+
+                    <p class="">Size 40 inch</p>
+                    <p>Color salmon</p>
+                    <p>Qty: <span class="controll">+</span>1<span class="controll">-</span></p>
+                </div>
+            </div>
+            <div class="item price">90k</div>
+            <div class="item controll">🗑️</div>
+
+        </div>
+    </section>
+    <div class="total">
+        <div class="donate">
+            <h3>Donate today and save hundreds</h3>
+            <p>There are numerous breast cancer patients which are helpless but you can save them with any amount</p>
+            <p><input type="text" placeholder="$20" size="3"> The amount will deducted when you checkout</p>
+        </div>
+        <div class="hisab">
+            <div class="">Subtotal</div>
+            <div class="">270k</div>
+            <div class="">Shipping</div>
+            <div class="">2k</div>
+            <div class="">Discount</div>
+            <div class="">0</div>
+            <div class="">Grand Total</div>
+            <div class="">272k</div>
+        </div>
+        <div class="map">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2990.274257380938!2d-70.56068388481569!3d41.45496659976631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e52963ac45bbcb%3A0xf05e8d125e82af10!2sDos%20Mas!5e0!3m2!1sen!2sus!4v1671220374408!5m2!1sen!2sus"
+                width="250" height="100"></iframe>
+            <p>select your location</p>
+
+        </div>
+
+    </div>
+    <div style="height: 2rem"></div>
+    <div class="shipping">
+        <div class="options">
+            <div class="method">
+                <p class="heading-cart">Shipping Method</p>
+                <p>select suitable delievery method that satisfy you</p>
+                <select name="" id="">
+                    <option value="">Standart Delievery</option>
+                    <option value="">Urgent Delievery</option>
+                    <option value="">Customer pick up</option>
+                </select>
+            </div>
+            <div class="method">
+                <p class="heading-cart">Payment method</p>
+                <div class="cards">
+                    <div class="card"><img src="paypal.png" width="25" alt=""></div>
+                    <div class="card"><img src="debit.png" width="30" alt=""></div>
+                    <div class="card"><img src="jazzcash.jpg" width="30" alt=""></div>
+                </div>
+                <input type="text" placeholder="credit card number" size="23"/>
+            </div>
+            <div class="method">
+                <p class="heading-cart">Coupon</p>
+                <p>Coupon provides discount based on shopping</p>
+                <input type="text" placeholder="Coupon code if any" size="23">
+            </div>
+        </div>
+        <div class="form">
+            <div class="handler">
+
+                <div class="heading-cart">Billing</div>
+                <p>fill the below form and get your product, we have several shipping methods that you fancy</p>
+                <div>
+                    <input class="bill" type="text" size="38" placeholder="First Name">
+                    <input class="bill" type="text" size="39" placeholder="last Name">
+                </div>
+                <div>
+                    <input class="bill" type="text" size="80" placeholder="email">
+                </div>
+                <div>
+                    <input class="bill" type="text" size="80" placeholder="phone number">
+                </div>
+                <div>
+                    <input class="bill" type="text" size="80" placeholder="">
+                </div>
+                    <button style="width:95%; padding:5px;">Checkout</button>
+                    <button style="width:95%; padding:5px;">Continue SHopping</button>
+            </div>
+            <div style="background-color: #2F4F4E; width: 30%;display: flex; align-items: center; justify-content: center;color: #FEA500;font-size: 45px;">
+                <p style="transform: rotate(-30deg); ;">Advertisement</p>
+                
+            
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
