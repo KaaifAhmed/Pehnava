@@ -1,9 +1,10 @@
 from django.shortcuts import redirect, render, HttpResponse
-from .models import NavSlider, News, Product, Category, ProdImages, Order
+from .models import NavSlider, News, Product, Category, ProdImages, Pending_Order, Delivered_Order, Customer
 from .forms import OrderForm
 from django.utils.safestring import mark_safe
 
 # Create your views here.
+
 def index(request):
     slides = NavSlider.objects.all()
     news = News.objects.all()[0]
@@ -12,6 +13,8 @@ def index(request):
     new_products = Product.objects.filter(tag="NEW")
     cat = Category.objects.all()
     imgs = ProdImages.objects.all()
+
+    shiftOrder(Pending_Order)
     
     
     return render(request, 'index.html', {
@@ -53,7 +56,7 @@ def checkout(request):
         print("I am here")
         form = OrderForm(request.POST)
         for field in form:
-            print(field, field.errors)
+            print(f"field.errors= {field.errors}")
         if form.is_valid():
             order = {
                 'email' : form.cleaned_data['email'],
@@ -66,13 +69,32 @@ def checkout(request):
                 'payment' : form.cleaned_data['payment'],
                 'delivery' : form.cleaned_data['delivery'],
                 'cart' : form.cleaned_data['cart'],
-    
-      
+                'delivered':form.cleaned_data['delivered'],
+
             }
-            print(order, "2")
+            for k in order.items():
+                print(f"key: {k}")
+
+            customer = Customer.objects.filter(email=order['email'])
+            if not customer:
+                customer = Customer(
+                    email = order['email'],
+                    phone = order['phone'],
+                    firstname = order['firstname'],
+                    lastname = order['lastname'],
+                    address = order['address'],
+                    town = order['town'],
+                    city = order['city']
+                )
+                customer.save()
+                customer = Customer.objects.filter(email=order['email'])
+            
+            order['customer'] = customer[0]
+            print(customer)
+            # print(order, "2")
 
 
-            _order = Order(**order)
+            _order = Pending_Order(**order)
             _order.save()   
         return redirect('/')
     else:
@@ -114,9 +136,32 @@ def search(request):
     
 
 def tracker(request, product):
-    context = {'order':Order.objects.get(id=product)}
+    context = {'order':Pending_Order.objects.get(id=product)}
 
     return render(request, 'tracker.html', context)
+
+
+
+
+# --------------------------
+def shiftOrder(orders):
+    # print(orders.first())
+    delivered_orders = orders.objects.filter(delivered=True)
+   
+    for delivered in delivered_orders[:]:
+        if delivered:
+            order = Delivered_Order(
+                cart = delivered.cart,
+                payment = delivered.payment,
+                delivery = delivered.delivery,
+                customer = delivered.customer,
+                ordered_date = str(delivered.created_date),
+            )
+            order.save()
+            delivered.delete()
+
+
+# --------------------------
 
 
 

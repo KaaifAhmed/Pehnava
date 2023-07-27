@@ -1,7 +1,20 @@
 from django.db import models
+from datetime import datetime
 
+class Customer(models.Model):
 
+    id = models.BigAutoField(primary_key=True)
+    email = models.EmailField(max_length=50, blank=True)
+    phone = models.CharField(max_length=12, blank=True)
+    firstname = models.CharField(max_length=50, blank=True)
+    lastname = models.CharField(max_length=50, blank=True)
+    address = models.CharField(max_length=100, blank=True)
+    town = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=100, blank=True)
 
+    def __str__(self):
+        return f"{self.firstname}-{self.lastname}"
+    
 
 class News(models.Model):
     name = models.CharField(max_length=50)
@@ -76,8 +89,9 @@ class ProdImages (models.Model):
 
 
 
-class Order (models.Model):
+class Pending_Order (models.Model):
     id = models.AutoField(primary_key=True)
+    delivered = models.BooleanField(default=False, blank=True)
     email = models.EmailField(max_length=50, blank=True)
     phone = models.CharField(max_length=12, blank=True)
     firstname = models.CharField(max_length=50, blank=True)
@@ -89,7 +103,35 @@ class Order (models.Model):
     delivery = models.CharField(max_length=30, blank=True)
     cart = models.TextField(null=True, blank=True)
     html_id = models.CharField(max_length=255, default='Order', blank=True)
+    created_date = models.DateTimeField(auto_now_add=True, null=True)
+    customer = models.ForeignKey(Customer, blank=True, null=True, on_delete=models.CASCADE)
+
+    class Meta:
+            verbose_name = "Pending_Order"
+            verbose_name_plural = "Pending_Orders"
+
+    
+    def __str__(self):
+        # time = datetime.strptime(str(self.created_date)[11:16], "%H:%M")
+        # format = "%I:%M %p"
+        return f"\"{self.firstname}-{self.lastname}\" ordered on {str(self.created_date)[:10]}"
+
+
+class Delivered_Order(models.Model):
+
+    cart = models.TextField(null=True, blank=True)
+    payment = models.CharField(max_length=30, blank=True)
+    delivery = models.CharField(max_length=30, blank=True)
+    ordered_date = models.CharField(max_length=20)
+    delivered_date = models.DateTimeField(auto_now_add=True, null=True)
+    customer = models.ForeignKey(Customer, null=True, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Delivered_Order"
+        verbose_name_plural = "Delivered_Orders"
 
     def __str__(self):
-        return f"Order id: {self.id}"
+        return f"{self.customer.firstname}-{self.customer.lastname}'s ordered was delivered on {str(self.delivered_date)[:10]}"
+
+
 

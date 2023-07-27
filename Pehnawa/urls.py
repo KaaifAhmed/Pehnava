@@ -25,7 +25,7 @@ from django.conf import settings
 
 urlpatterns = [
     
-    path('fazool/', admin.site.urls),
-    path('admin/', include("Panel.urls")),
+    path('admin/', admin.site.urls),
+    # path('admin/', include("Panel.urls")),
     path('', include("Store.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

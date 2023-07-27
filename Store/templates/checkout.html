@@ -29,10 +29,12 @@
                 {% for field in form %}
 
 
-                {% if field.name == 'html_id'%}    
-                <input type="hidden" placeholder="{{field.name.upper}}" name="form-{{field.name}}" />
+                {% if field.name == 'html_id' %}    
+                <input type="hidden" name="form-{{field.name}}"/>
                 {% elif field.name == 'cart'%}
                 <input type="hidden" placeholder="{{field.name.upper}}" name="{{field.name}}" id="acutal_cart"/>
+                {% elif field.name == 'customer' or field.name == 'delivered'%}
+                <input type="hidden"  name="{{field.name}}"/>
                 {% else %}
               
 

@@ -10,7 +10,8 @@ Models = {
        'images':models.ProdImages.objects,
        'categories':models.Category.objects,
        'news':models.News.objects,
-       'order':models.Order.objects,
+       'p_order':models.Pending_Order.objects,
+       'd_order':models.Delivered_Order.objects,
     }
 Forms = {
     'products':forms.ProductForm,
