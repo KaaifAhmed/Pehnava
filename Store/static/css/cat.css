@@ -4,18 +4,20 @@
 */
 
 .header-category {
-    border: 1px solid var(--color-1--);
-    height: 2.5rem;
+    /* border: 1px solid var(--color-1--); */
+    height: 3rem;
     width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
   }
+
   .header-category > #cat-tray {
     display: flex;
     align-items: center;
     width: 95%;
-    gap: 50px;
+    gap: 30px;
     overflow-x: hidden;
     overflow-y: hidden;
     white-space: nowrap;
