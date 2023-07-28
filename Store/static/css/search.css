@@ -23,6 +23,7 @@ body {
     align-items: center;
     padding: 2rem 2rem 3rem 2rem;
     gap: 3rem;
+    min-height: 56vh;
 }
 
 .results-head {
@@ -110,21 +111,21 @@ body {
 
   @media only screen and (max-width: 800px) {
     .results-prods {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 1rem;
     }
 
     .results {
-      padding: 1rem 1rem 3rem 1rem;
+      padding: 1rem 1.2rem 3rem 1.2rem;
       gap: 2rem;
     }
     
     .results-prods > .product > .prod-desc > .prod-name {
-      font-size: 16px;
+      font-size: 20px;
     }
 
     .results-prods > .product > .prod-desc > .prod-price {
-      font-size: 14px;
+      font-size: 16px;
       margin-bottom: 10px;
     }
 

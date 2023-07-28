@@ -60,8 +60,7 @@ let expandable = document.getElementById("expandable");
 //   console.log("hello");
 // })
 
-
-document.getElementById("cat-tray-m").addEventListener("click", function () {
-  expandable.classList.toggle("none")
-  expandable.style.opacity = expandable.style.opacity === '1' ? '0' : '1';
-})
+function catTrayToggle() {
+  expandable.classList.toggle("tray-show")
+  // expandable.style.opacity = expandable.style.opacity === '1' ? '0' : '1';
+}

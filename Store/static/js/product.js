@@ -41,7 +41,15 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     shipBtn.addEventListener('click', function() {
-      prodDetails.innerHTML = `I dont know`;
+      prodDetails.innerHTML = `<ul style="margin-bottom: 10px; display: flex; flex-direction: column; gap: 8px; list-style: none;">
+      <li>
+      Items returned without authorization will not be accepted.</li>
+      <li>
+      Items must be returned within 30 days after you receive them.</li>
+      <li>
+      All items must be in the same condition that you received it, unworn or unused, with tags, and in its original packaging. You will also need the receipt or proof of purchase.</li>
+      <li>When returning or exchanging items, customers must use a shipping method providing tracking information.</li>
+  </ul>`;
     })
 
     careBtn.addEventListener('click', function() {
@@ -54,7 +62,20 @@ document.addEventListener('DOMContentLoaded', function() {
   </ul>`;
     })
 
-});
+    
+  });
+function sizeChart(cmd) {
+  if (cmd === "open") {
+    document.getElementById('size-chart').style.display = 'flex';
+  } else {
+    document.getElementById('size-chart').style.display = 'none';
+  }
+}
+
+function sizeSelect(id) {
+  document.querySelector('.selected-size').classList.remove('selected-size');
+  document.getElementById(id).classList.add('selected-size');
+}
 
 
 var number = 1;

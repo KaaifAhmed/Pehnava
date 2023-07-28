@@ -16,36 +16,6 @@
 </div>
 {% endblock news %}
 
-{% block cat %}
-<div class="header-category">
-    <div id="cat-tray">
-        {% for Cat in category %}
-        <div class="cat" onclick="location.href = '/search/?-search={{Cat}}-c'">{{Cat}}</div>
-        {% endfor %} 
-        {% comment %} {% for Cat in category %}
-        <div class="cat" onclick="location.href = '/search/?-search={{Cat}}-c'">{{Cat}}</div>
-        {% endfor %}  {% endcomment %}
-        
-    </div>
-
-</div>
-<div class="header-category-mobile none">
-    <div id="cat-tray-m">
-        <div class="material-symbols-outlined">menu</div>
-        {% comment %} <div class="categoryName">Categories</div> {% endcomment %}
-    </div>
-</div>
-
-<div class="category-expand none" id="expandable">
-    {% for Cat in category %}
-        <div class="cat" onclick="location.href = '/search/?-search={{Cat}}-c'">{{Cat}}</div>
-    {% endfor %} 
-    {% for Cat in category %}
-        <div class="cat" onclick="location.href = '/search/?-search={{Cat}}-c'">{{Cat}}</div>
-    {% endfor %} 
-</div>
-{% endblock cat %}
-
 
 {% block header %}
 <section class="hero">
@@ -67,6 +37,19 @@
 
 
 {% block main %}
+
+<!-- Order Success -->
+
+<section class="order-success">
+    <div class="main">
+        <button onclick="document.querySelector('.order-success').style.display='none'">&#10005;</button>
+        <p class="check">&#10003;</p>
+        <h6>Order Successful!</h6>
+        <h5>Your order id: E-3001</h5>
+        <p>Contact us at <b>+92 3308 496238</b> for further details!</p>
+    </div>
+</section>
+
 
 <!-- Top Products -->
 
