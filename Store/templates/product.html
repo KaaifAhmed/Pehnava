@@ -41,10 +41,10 @@
     <p class="prod-price">PKR <span id="pr-price">{{product.price}}</span></p>
     <hr />
     <span class="prod-size">
-      <span class="buttons">
-        <button id="size-s" class="button selected-size" onclick="sizeSelect(this.id)">S</button>
-        <button id="size-m" class="button" onclick="sizeSelect(this.id)">M</button>
-        <button id="size-l" class="button" onclick="sizeSelect(this.id)">L</button>
+      <span class="buttons" id="product-sizes">
+        {% for size in sizes %}
+          <button id="size-{{size|lower}}" class="button" onclick="sizeSelect(this.id)">{{size}}</button>
+        {% endfor %}
       </span>
       <button onclick="sizeChart('open')" class="size-chart">
         <svg
@@ -197,9 +197,17 @@
         <p id="prod-qty">1</p>
         <button id="qty-add" class="animatedButton">+</button>
       </span>
+      {% if product.qty == 0%}
+      <button class="atc" id="moveToCheckout" style="opacity:0.4; cursor:no-drop;background-color: #000000;color: white;">
+        Order Now
+      </button>
+      
+      {% else %}
       <button class="atc" id="moveToCheckout" onclick="proceed()">
         Order Now
       </button>
+      
+      {% endif %}
     </span>
     <div class="prod-details" id="prod-details-pc">
       <span class="details-top">

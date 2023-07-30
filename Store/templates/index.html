@@ -40,15 +40,20 @@
 
 <!-- Order Success -->
 
+{% if id != None%}
 <section class="order-success">
     <div class="main">
-        <button onclick="document.querySelector('.order-success').style.display='none'">&#10005;</button>
+        <button id="placement-success" onclick="button()">&#10005;</button>
         <p class="check">&#10003;</p>
         <h6>Order Successful!</h6>
-        <h5>Your order id: E-3001</h5>
-        <p>Contact us at <b>+92 3308 496238</b> for further details!</p>
+        <h5>Your order id: {{id}}</h5>
+        <div style="text-align: center;"> <!-- This text align property acutally fixed responisveness on mobile devices -->
+            <p>Contact us at <b>+92 3308 496238</b> for further details!</p>
+            <p>Take a picture to memorize</p>
+        </div>
     </div>
 </section>
+{% endif %}
 
 
 <!-- Top Products -->

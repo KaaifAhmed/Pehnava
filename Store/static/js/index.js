@@ -1,5 +1,6 @@
 
 $(document).ready(function() {
+    localStorage.clear()
     var slides = $('#hero-slider .slide');
     var currentSlide = 0;
   
@@ -56,4 +57,12 @@ function URL_dispatcher(id) {
     location.href = ```products/${String(id)}```;
   }
 
+ 
 
+
+
+
+function button () {
+  document.querySelector('.order-success').style.display='none';
+  location.href = "/";
+}

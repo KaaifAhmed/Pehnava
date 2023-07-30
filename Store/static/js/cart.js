@@ -2,13 +2,14 @@ const cart = {};
 var cartitem;
 var delievery_price = 50
 class Desc {
-    constructor(itemname, qty, individual_price, net_price, color, img, dp) {
+    constructor(itemname, qty, individual_price, net_price, color, size, img, dp) {
     this.name = itemname
     this.qty = qty;
     this.ind_price = individual_price;
     this.net_price = net_price;
     this.img = img
     this.color = color;
+    this.size = size;
     this.delievery = dp
     }
 }
@@ -36,10 +37,14 @@ function proceed () {
     ind_price = document.getElementById('pr-price').innerText;
     net_price = parseInt(qty)*parseInt(ind_price)
     color = null;
+    size = $('#product-sizes .selected-size');
+    
+
+   
     img = document.getElementById('main-img').src;
 
 
-    addToCart(itemname, qty, ind_price, net_price, color, img, delievery_price);
+    addToCart(itemname, qty, ind_price, net_price, color,size.text() ,img, delievery_price);
     
     document.location.href = '../checkout'
 }

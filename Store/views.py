@@ -5,18 +5,27 @@ from django.utils.safestring import mark_safe
 
 # Create your views here.
 
-def index(request):
-    slides = NavSlider.objects.all()
-    news = News.objects.all()[0]
-    top_products = Product.objects.filter(on_top_product=True)
-    sug_products = Product.objects.all()
-    new_products = Product.objects.filter(tag="NEW")
-    cat = Category.objects.all()
-    imgs = ProdImages.objects.all()
+slides = NavSlider.objects.all()
+news = News.objects.all()[0]
+top_products = Product.objects.filter(on_top_product=True)
+sug_products = Product.objects.all()
+new_products = Product.objects.filter(tag="NEW")
+cat = Category.objects.all()
+imgs = ProdImages.objects.all()
+o_id = None
 
+
+def index(request, id=None):
+    global o_id
     shiftOrder(Pending_Order)
     
     
+    if id and o_id is None:
+        return redirect("/")
+    
+    if id:
+        o_id = None
+
     return render(request, 'index.html', {
         "slides": slides,
         "news":news,
@@ -24,39 +33,39 @@ def index(request):
         "sug_products": sug_products,
         "new_products": new_products,
         "category": cat,
-        "imgs":imgs
+        "imgs":imgs,
+        "id":id
     })
 
 def product(request, slug):
 
     products = Product.objects.filter(raw_slug=slug).first()
-    # print(products, products.name, products.cat)
     images = ProdImages.objects.filter(name=products)
     suggestions = Product.objects.filter(cat=products.cat)
     suggestions = list(suggestions)
     suggestions.remove(products)
-    print(suggestions)
     news = News.objects.all()[0]
     s_images = ProdImages.objects.all()
     cat = Category.objects.all()
+
 
     return render(request, 'product.html', {
         'product': products,
         # 'product': mark_safe(products),
         'images':images,
-        "suggestions":suggestions,
+        'suggestions':suggestions,
         's_images':s_images,
-        "news":news,
+        'news':news,
         'category':cat,
+        'sizes':products.size.all(),
+        'colors':products.color.all()
     })
 
 def checkout(request):
+    from json import loads
     form = OrderForm()
     if request.method == 'POST':
-        print("I am here")
         form = OrderForm(request.POST)
-        for field in form:
-            print(f"field.errors= {field.errors}")
         if form.is_valid():
             order = {
                 'email' : form.cleaned_data['email'],
@@ -72,9 +81,6 @@ def checkout(request):
                 'delivered':form.cleaned_data['delivered'],
 
             }
-            for k in order.items():
-                print(f"key: {k}")
-
             customer = Customer.objects.filter(email=order['email'])
             if not customer:
                 customer = Customer(
@@ -90,19 +96,22 @@ def checkout(request):
                 customer = Customer.objects.filter(email=order['email'])
             
             order['customer'] = customer[0]
-            print(customer)
-            # print(order, "2")
-
 
             _order = Pending_Order(**order)
             _order.save()   
-        return redirect('/')
+            cart = loads(order.get('cart'))
+            val = decrementQunatity(cart['name'], int(cart['qty']))
+            
+            global o_id
+            o_id = _order.id
+
+        return redirect(f"/{_order.id}")
     else:
-       
+      
         context = {
             'form':form,
         }
-      
+       
         return render(request, 'checkout.html', context)
      
 
@@ -159,6 +168,14 @@ def shiftOrder(orders):
             )
             order.save()
             delivered.delete()
+
+
+def decrementQunatity(of:str, by:int):
+    product = Product.objects.filter(name=of).first()
+    product.qty -= by
+    product.save()
+
+    return Product.objects.filter(name=of).first().qty
 
 
 # --------------------------

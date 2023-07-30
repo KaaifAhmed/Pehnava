@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.utils.safestring import mark_safe
 
 class Customer(models.Model):
 
@@ -47,6 +48,32 @@ class NavSlider(models.Model):
         return self.name
 
 
+class Size(models.Model):
+    size = models.CharField(blank=True, max_length=10)
+    code = str(size)[0]  
+
+    class Meta:
+        verbose_name = "Product Size"
+        verbose_name_plural = "Product Sizes"
+     
+    def __str__(self):
+        return f"{self.size[0]}"
+    
+
+class Color(models.Model):
+    color = models.CharField(blank=True, max_length=10)
+    code = str(color)[0]    
+
+    class Meta:
+        verbose_name = "Product Color"
+        verbose_name_plural = "Product Colors"
+    
+    def __str__(self):
+        return f"{self.color[0]}"
+    
+
+
+
 
 class Product(models.Model):
 
@@ -59,9 +86,13 @@ class Product(models.Model):
     price = models.IntegerField()
     raw_slug = models.CharField(max_length=50)
     img = models.URLField()
+    size = models.ManyToManyField(Size)
+    color = models.ManyToManyField(Color)
+
     on_top_product = models.BooleanField(default=False)
     hide = models.BooleanField(default=False)
     html_id = models.CharField(max_length=255, default='Products', blank=True)
+
 
     choices = []
     for x in Category.objects.all():
@@ -73,6 +104,7 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
 
 
 
@@ -107,14 +139,14 @@ class Pending_Order (models.Model):
     customer = models.ForeignKey(Customer, blank=True, null=True, on_delete=models.CASCADE)
 
     class Meta:
-            verbose_name = "Pending_Order"
-            verbose_name_plural = "Pending_Orders"
+            verbose_name = "Order (Pending)"
+            verbose_name_plural = "Orders (Pending)"
 
     
     def __str__(self):
         # time = datetime.strptime(str(self.created_date)[11:16], "%H:%M")
         # format = "%I:%M %p"
-        return f"\"{self.firstname}-{self.lastname}\" ordered on {str(self.created_date)[:10]}"
+        return f"Order id: {self.id},  \"{self.firstname}-{self.lastname}\" ordered on {str(self.created_date)[:10]}"
 
 
 class Delivered_Order(models.Model):
@@ -127,11 +159,10 @@ class Delivered_Order(models.Model):
     customer = models.ForeignKey(Customer, null=True, on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = "Delivered_Order"
-        verbose_name_plural = "Delivered_Orders"
+        verbose_name = "Order (Delivered)"
+        verbose_name_plural = "Orders (Delivered)"
 
     def __str__(self):
         return f"{self.customer.firstname}-{self.customer.lastname}'s ordered was delivered on {str(self.delivered_date)[:10]}"
-
 
 

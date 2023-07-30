@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let main_img = document.getElementById('main-img');
     let container = document.getElementById('small-images-container');
+
+    document.getElementById("product-sizes").firstElementChild.classList.add("selected-size")
     
     try {
       let lens = document.getElementById('lens');
@@ -13,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch (error) {
     }
 
-    // lens.classList.toggle("hidden")
   
     smallImages.forEach(function(image) {
         image.addEventListener('click', function() {
@@ -78,67 +79,77 @@ function sizeSelect(id) {
 }
 
 
-var number = 1;
 var addBtn = document.getElementById('qty-add');
 var subtractBtn = document.getElementById('qty-sub');
 var total = parseInt(document.getElementById('pr-qty').innerText);
-
-document.addEventListener('DOMContentLoaded', function() {
-    var numberElement = document.getElementById('prod-qty');
-
-    // console.log(numberElement.textContent);
-  
-    addBtn.addEventListener('click', function() {
-      if (number < total) {
-        number++;
-        numberElement.textContent = number;
-        if (! addBtn.classList.contains('animatedButton')) {
-          addBtn.classList.add('animatedButton');
-          addBtn.style.opacity = 1;
-        }
-        if (number == total) {
+if (total == 0) {
+  var number = 0;
+  document.getElementById('prod-qty').innerText = 0;
+} else {
+  var number = 1;
+  document.addEventListener('DOMContentLoaded', function() {
+      var numberElement = document.getElementById('prod-qty');  
+      addBtn.addEventListener('click', function() {
+        if (number < total) {
+          number++;
+          numberElement.textContent = number;
+          if (! addBtn.classList.contains('animatedButton')) {
+            addBtn.classList.add('animatedButton');
+            addBtn.style.opacity = 1;
+          }
+          if (number == total) {
+            addBtn.classList.remove('animatedButton');
+            addBtn.style.opacity = 0.3;
+          }
+          if (number != 1) {
+            subtractBtn.classList.add('animatedButton');
+            subtractBtn.style.opacity = 1;
+          }
+        } else {
           addBtn.classList.remove('animatedButton');
           addBtn.style.opacity = 0.3;
         }
-        if (number != 1) {
-          subtractBtn.classList.add('animatedButton');
-          subtractBtn.style.opacity = 1;
-        }
-      } else {
-        addBtn.classList.remove('animatedButton');
-        addBtn.style.opacity = 0.3;
-      }
-    });
-  
-    subtractBtn.addEventListener('click', function() {
-      if (number > 1) {
-        number--;
-        numberElement.textContent = number;
-        if (! subtractBtn.classList.contains('animatedButton')) {
-          subtractBtn.classList.add('animatedButton');
-          subtractBtn.style.opacity = 1;
-        }
-        if (number != total) {
-          addBtn.classList.add('animatedButton');
-          addBtn.style.opacity = 1;
-        }
-        if (number == 1) {
+      });
+    
+      subtractBtn.addEventListener('click', function() {
+        if (number > 1) {
+          number--;
+          numberElement.textContent = number;
+          if (! subtractBtn.classList.contains('animatedButton')) {
+            subtractBtn.classList.add('animatedButton');
+            subtractBtn.style.opacity = 1;
+          }
+          if (number != total) {
+            addBtn.classList.add('animatedButton');
+            addBtn.style.opacity = 1;
+          }
+          if (number == 1) {
+            subtractBtn.classList.remove('animatedButton');
+            subtractBtn.style.opacity = 0.3;
+          }
+        } else {
           subtractBtn.classList.remove('animatedButton');
           subtractBtn.style.opacity = 0.3;
         }
-      } else {
-        subtractBtn.classList.remove('animatedButton');
-        subtractBtn.style.opacity = 0.3;
-      }
-    });
+      });
 
-});
-  
+  });
+  }
+
+
     
 if (number == 1) {
   subtractBtn.classList.remove('animatedButton');
   subtractBtn.style.opacity = 0.3;
-} 
+} if (number == 1 && total == 1) {
+  addBtn.classList.remove('animatedButton');
+  addBtn.style.opacity = 0.3;
+} if (number == 0 && total == 0) {
+  subtractBtn.classList.remove('animatedButton');
+  subtractBtn.style.opacity = 0.3;
+  addBtn.classList.remove('animatedButton');
+  addBtn.style.opacity = 0.3;
+}
 
 
 $(document).ready(function() {
@@ -181,7 +192,6 @@ function isMobileDevice() {
 function ImageZoom(imgId) {
   
   if (!isMobileDevice()) {
-    console.log(isMobileDevice());
     let img = document.getElementById(imgId)
     let lens = document.getElementById('lens')
     var pos = 0;
