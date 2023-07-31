@@ -1,10 +1,16 @@
-{% extends 'base.html' %} {% load static %} {% load tag %} {% block title %}{{product.name}} | Pehnava{% endblock title %} {% block news %}
-<div class="navBar-top">{{news}}</div>
-{% endblock news %} {% block head %}
+{% extends 'base.html' %} 
+{% load static %} 
+{% load tag %} 
+{% block title %}{{product.name}} | Pehnava{% endblock title %} 
+{% block news %}<div class="navBar-top">{{news}}</div>{% endblock news %}
+{% block head %}
 <link rel="stylesheet" href="{% static 'css/product.css' %}" />
 <link rel="stylesheet" href="{% static 'css/index.css' %}" />
 <link rel="stylesheet" href="{% static 'css/cat.css' %}" />
-{% endblock head %} {% block main %}
+{% endblock head %} 
+
+
+{% block main %}
 
 <!-- Product Imagery -->
 
@@ -227,11 +233,19 @@
       <span class="details-top">
         <h5 class="details-head current-detail">Product Details</h5>
       </span>
-      <span class="details" id="details--1"> {{product.desc|safe}} </span>
+      <span class="details"> {{product.desc|safe}} </span>
       <span class="details-top">
         <h5 class="details-head">Shipping and Return</h5>
       </span>
-      <span class="details" id="details--1"> {{product.desc|safe}} </span>
+      <span class="details"> <ul style="margin-bottom: 10px; display: flex; flex-direction: column; gap: 8px; list-style: none;">
+        <li>
+        Items returned without authorization will not be accepted.</li>
+        <li>
+        Items must be returned within 30 days after you receive them.</li>
+        <li>
+        All items must be in the same condition that you received it, unworn or unused, with tags, and in its original packaging. You will also need the receipt or proof of purchase.</li>
+        <li>When returning or exchanging items, customers must use a shipping method providing tracking information.</li>
+    </ul> </span>
       <span class="details-top">
         {% if product.cat == 'unstitched' %}
         <h5 class="details-head">Size Chart</h5>
@@ -239,7 +253,7 @@
         <h5 class="details-head">Care Instructions</h5>
         {% endif %}
       </span>
-      <span class="details" id="details--1">
+      <span class="details">
         <ul
           style="
             margin-bottom: 10px;
