@@ -11,10 +11,14 @@
 {% endblock head %} 
 
 {% block news %}
+{% if news %}
 <div class="navBar-top">
     {{news}}
 </div>
+{% endif %}
 {% endblock news %}
+
+
 
 
 {% block header %}
@@ -23,10 +27,14 @@
     {% for slide in slides %}
     <div class="slide">
         <a href="#" class="desktop">
-            <img src="{{slide.name}}" alt="slide{{forloop.counter}}"/>
+            <img src="{{slide.image.url}}" alt="slide{{forloop.counter}}"/>
         </a>
         <a href="#" class="mobile">
-            <img src="https://cdn.shopify.com/s/files/1/0623/6481/1444/files/Jacquard-Slider-Mobile_1.jpg?v=1683273027&width=575" alt="slide{{forloop.counter}}"/>
+            {% if slide.responsified_image %}
+            <img src="{{slide.responsified_image.url}}" alt="slide{{forloop.counter}}"/>
+            {% else %}
+            <img src="https://w7.pngwing.com/pngs/336/743/png-transparent-error-404-404-error.png" />
+            {% endif %}
         </a>
         
     </div>
@@ -63,8 +71,8 @@
     <div class="prod-container">
         <div class="slider">
             {%for product in top_products%}
-            <a id="{{product.id}}" class="product" href="/product/{{product.raw_slug}}">
-                <img src="{{product.img}}" alt="" class="prod-img">
+            <a id="{{product.id}}" class="product" href="/product/{{product.slug}}">
+                <img src="{{product.image.url}}" alt="" class="prod-img">
                 <img src="{{imgs|parseRandom:product.name}}" alt="" class="prod-img-b">
                 <p class="prod-tag" style="background-color: {{product.tag_color}}">{{product.tag}}</p>
                 <div class="prod-desc">
@@ -103,8 +111,8 @@
     <div class="prod-container">
         <div class="slider">
             {%for product in sug_products%}
-            <a id="{{product.id}}" class="product" href="/product/{{product.raw_slug}}">
-                <img src="{{product.img}}" alt="" class="prod-img">
+            <a id="{{product.id}}" class="product" href="/product/{{product.slug}}">
+                <img src="{{product.image.url}}" alt="" class="prod-img">
                 <img src="{{imgs|parseRandom:product.name}}" alt="" class="prod-img-b">
                 <p class="prod-tag" style="background-color: {{product.tag_color}}">{{product.tag}}</p>
                 <div class="prod-desc">
@@ -124,8 +132,8 @@
     <div class="prod-container">
         <div class="slider">
             {%for product in new_products%}
-            <a id="{{product.id}}" class="product" href="/product/{{product.raw_slug}}">
-                <img src="{{product.img}}" alt="" class="prod-img">
+            <a id="{{product.id}}" class="product" href="/product/{{product.slug}}">
+                <img src="{{product.image.url}}" alt="" class="prod-img">
                 <img src="{{imgs|parseRandom:product.name}}" alt="" class="prod-img-b">
                 <p class="prod-tag" style="background-color: {{product.tag_color}}">{{product.tag}}</p>
                 <div class="prod-desc">

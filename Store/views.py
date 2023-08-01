@@ -1,17 +1,17 @@
 from django.shortcuts import redirect, render, HttpResponse
-from .models import NavSlider, News, Product, Category, ProdImages, Pending_Order, Delivered_Order, Customer
+from .models import Banner, News, Product, ProductImagery, Pending_Order, Delivered_Order, Customer, Category
 from .forms import OrderForm
 from django.utils.safestring import mark_safe
 
 # Create your views here.
 
-slides = NavSlider.objects.all()
-news = News.objects.all()[0]
+slides = Banner.objects.all()
+news = News.objects.all().first()
 top_products = Product.objects.filter(on_top_product=True)
 sug_products = Product.objects.all()
-new_products = Product.objects.filter(tag="NEW")
+new_products = Product.objects.filter(tag="New")
 cat = Category.objects.all()
-imgs = ProdImages.objects.all()
+imgs = ProductImagery.objects.all()
 o_id = None
 
 
@@ -26,6 +26,8 @@ def index(request, id=None):
     if id:
         o_id = None
 
+    
+    # print(news)
     return render(request, 'index.html', {
         "slides": slides,
         "news":news,
@@ -39,13 +41,13 @@ def index(request, id=None):
 
 def product(request, slug):
 
-    products = Product.objects.filter(raw_slug=slug).first()
-    images = ProdImages.objects.filter(name=products)
-    suggestions = Product.objects.filter(cat=products.cat)
+    products = Product.objects.filter(slug=slug).first()
+    images = ProductImagery.objects.filter(name=products)
+    suggestions = Product.objects.filter(category=products.category)
     suggestions = list(suggestions)
     suggestions.remove(products)
-    news = News.objects.all()[0]
-    s_images = ProdImages.objects.all()
+    news = News.objects.all().first()
+    s_images = ProductImagery.objects.all()
     cat = Category.objects.all()
 
 
@@ -57,14 +59,15 @@ def product(request, slug):
         's_images':s_images,
         'news':news,
         'category':cat,
-        'sizes':products.size.all(),
-        'colors':products.color.all()
+        'sizes':products.sizes.all()
     })
 
 def checkout(request):
     from json import loads
+    
     form = OrderForm()
     if request.method == 'POST':
+
         form = OrderForm(request.POST)
         if form.is_valid():
             order = {
@@ -81,6 +84,7 @@ def checkout(request):
                 'delivered':form.cleaned_data['delivered'],
 
             }
+            
             customer = Customer.objects.filter(email=order['email'])
             if not customer:
                 customer = Customer(
@@ -97,10 +101,16 @@ def checkout(request):
             
             order['customer'] = customer[0]
 
+            cart = loads(order.get('cart'))
+                        
+            cart = ManipulationAfterPlacement(cart['name'], int(cart['qty']), cart)
+            order['cart'] = cart
+
+
             _order = Pending_Order(**order)
             _order.save()   
-            cart = loads(order.get('cart'))
-            val = decrementQunatity(cart['name'], int(cart['qty']))
+
+
             
             global o_id
             o_id = _order.id
@@ -119,19 +129,19 @@ def checkout(request):
 def search(request):
 
     query : str = request.GET.get('-search')
-    print(len(query)>1, query[-2] == '-', query)
+    # print(len(query)>1, query[-2] == '-', query)
     if len(query)>1 and query[-2] == '-':
         catSearchResult = True
         query = query[:-2]
-        print(query)
+        # print(query)
     else:
         catSearchResult = False
-    catwise = Product.objects.filter(cat__icontains=query)
-    slugwise = Product.objects.filter(raw_slug__icontains=query)
+    catwise = Product.objects.filter(category__icontains=query)
+    slugwise = Product.objects.filter(slug__icontains=query)
     namewise = Product.objects.filter(name__icontains=query)
     descwise = Product.objects.filter(desc__icontains=query)
     results = catwise.union(slugwise, descwise, namewise)
-    imgs = ProdImages.objects.all()
+    imgs = ProductImagery.objects.all()
     
     context = {
         'results':results,
@@ -152,9 +162,8 @@ def tracker(request, product):
 
 
 
-# --------------------------
+# ---------------- Non rendering functions ----------
 def shiftOrder(orders):
-    # print(orders.first())
     delivered_orders = orders.objects.filter(delivered=True)
    
     for delivered in delivered_orders[:]:
@@ -164,21 +173,36 @@ def shiftOrder(orders):
                 payment = delivered.payment,
                 delivery = delivered.delivery,
                 customer = delivered.customer,
-                ordered_date = str(delivered.created_date),
+                ordered_date = str(delivered.placement_date),
             )
             order.save()
             delivered.delete()
 
 
-def decrementQunatity(of:str, by:int):
+def ManipulationAfterPlacement(of:str, by:int, cart:str):
     product = Product.objects.filter(name=of).first()
     product.qty -= by
+    _ = formatCart(cart)
     product.save()
+    return _
 
-    return Product.objects.filter(name=of).first().qty
 
 
-# --------------------------
+def formatCart(cart:dict):
+
+
+    cart.pop('net_price')
+    cart.pop('color')
+    cart['total'] = int(cart['ind_price'])*int(cart['qty']) + int(cart['delievery'])
+
+
+    to_return = ''''''
+    for key, value in cart.items():
+        to_return += f"\n{str(key).capitalize()}: '{value}'"
+    
+    return to_return
+
+#  ---------------- Non rendering functions ----------
 
 
 

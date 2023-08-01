@@ -9,7 +9,7 @@ def parseRandom(model, name):
     imgs = []
     for m in model:
         if str(m) == name:
-            imgs.append(m.url)
+            imgs.append(m.image.url)
     if len(imgs) > 0:
         return choice(imgs)
 

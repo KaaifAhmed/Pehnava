@@ -12,7 +12,7 @@ class ProductForm(forms.ModelForm):
 
 class NavForm(forms.ModelForm):
     class Meta:
-        model = models.NavSlider
+        model = models.Banner
         fields = '__all__'
     
 
@@ -24,7 +24,7 @@ class CatForm(forms.ModelForm):
 
 class ImagesForm(forms.ModelForm):
     class Meta:
-        model = models.ProdImages
+        model = models.ProductImagery
         fields = '__all__'
     
 

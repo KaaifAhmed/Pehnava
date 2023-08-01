@@ -2,7 +2,14 @@
 {% load static %} 
 {% load tag %} 
 {% block title %}{{product.name}} | Pehnava{% endblock title %} 
-{% block news %}<div class="navBar-top">{{news}}</div>{% endblock news %}
+{% block news %}
+{% if news %}
+<div class="navBar-top">
+    {{news}}
+</div>
+{% endif %}
+{% endblock news %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/product.css' %}" />
 <link rel="stylesheet" href="{% static 'css/index.css' %}" />
@@ -17,15 +24,15 @@
 <section class="prodView">
   <div class="product-image">
     <div class="images" id="small-images-container">
-      <img src="{{product.img}}" alt="" class="small-image" />
+      <img src="{{product.image.url}}" alt="" class="small-image" />
       {% for img in images %}
-      <img src="{{img.url}}" alt="" class="small-image" />
+      <img src="{{img.image.url}}" alt="" class="small-image" />
 
       {% endfor %}
     </div>
 
     <div id="lens"></div>
-    <img src="{{product.img}}" alt="" class="main-img" id="main-img" />
+    <img src="{{product.image.url}}" alt="" class="main-img" id="main-img" />
   </div>
 
   <div id="product-desc">
@@ -281,7 +288,7 @@
   <div class="prod-container">
     <div class="slider" id="suggested-slider">
       {% for suggestion in suggestions %}
-      <a class="product" href="/product/{{suggestion.raw_slug}}">
+      <a class="product" href="/product/{{suggestion.slug}}">
         <img src="{{suggestion.img}}" alt="" class="prod-img" />
         <img
           src="{{s_images|parseRandom:suggestion.name}}"
