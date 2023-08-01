@@ -83,12 +83,12 @@ class Product(models.Model):
     category = models.CharField(choices=choices, max_length=13, null=True)
     sizes = models.ManyToManyField(Size, blank=True, null=True)
 
-    tag = models.CharField(max_length=50)
-    tag_color = models.CharField(max_length=20)
-    desc = models.CharField(max_length=9999)
+    tag = models.CharField(max_length=50, null=True)
+    tag_color = models.CharField(max_length=20, null=True)
+    desc = models.CharField(max_length=9999, null=True)
 
-    on_top_product = models.BooleanField(default=False)
-    hide = models.BooleanField(default=False)
+    on_top_product = models.BooleanField(default=False, null=True)
+    hide = models.BooleanField(default=False, null=True)
     html_id = "Products"
 
     def __str__(self):
