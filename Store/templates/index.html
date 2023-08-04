@@ -70,7 +70,7 @@
     <h1 class="topProds-head">Top Products</h1>
     <div class="prod-container">
         <div class="slider">
-            {%for product in top_products%}
+            {% for product in top_products %}
             <a id="{{product.id}}" class="product" href="/product/{{product.slug}}">
                 <img src="{{product.image.url}}" alt="" class="prod-img">
                 <img src="{{imgs|parseRandom:product.name}}" alt="" class="prod-img-b">

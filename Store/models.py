@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.utils.safestring import mark_safe
 
+
 class Customer(models.Model):
 
     id = models.BigAutoField(primary_key=True)
@@ -12,6 +13,8 @@ class Customer(models.Model):
     address = models.CharField(max_length=100, blank=True)
     town = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=100, blank=True)
+
+
 
     def __str__(self):
         return f"{self.firstname}-{self.lastname}"
@@ -58,6 +61,7 @@ class Size(models.Model):
     class Meta:
         verbose_name = "Product Size"
         verbose_name_plural = "Product Sizes"
+
      
     def __str__(self):
         return f"{self.size[0]}"
@@ -90,6 +94,8 @@ class Product(models.Model):
     on_top_product = models.BooleanField(default=False, null=True)
     hide = models.BooleanField(default=False, null=True)
     html_id = "Products"
+
+
 
     def __str__(self):
         return self.name
@@ -129,12 +135,16 @@ class Pending_Order (models.Model):
     cart = models.TextField(null=True, blank=True)
     html_id = 'Order'
     placement_date = models.DateTimeField(auto_now_add=True, null=True)
+    
     customer = models.ForeignKey(Customer, blank=True, null=True, on_delete=models.CASCADE)
 
     class Meta:
-            verbose_name = "Order (Pending)"
-            verbose_name_plural = "Orders (Pending)"
+        verbose_name = "Order (Pending)"
+        verbose_name_plural = "Orders (Pending)"
+        app_label = 'Store'
 
+    def ordered_date(self):
+        return self.placement_date.date().strftime('%d-%m-%y')
     
     def __str__(self):
         return f"Order id: {self.id},  \"{self.firstname}-{self.lastname}\" ordered on {str(self.placement_date)[:10]}"
@@ -152,6 +162,7 @@ class Delivered_Order(models.Model):
     class Meta:
         verbose_name = "Order (Delivered)"
         verbose_name_plural = "Orders (Delivered)"
+  
 
     def __str__(self):
         return f"{self.customer.firstname}-{self.customer.lastname}'s ordered was delivered on {str(self.delivered_date)[:10]}"

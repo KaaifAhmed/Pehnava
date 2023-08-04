@@ -17,6 +17,7 @@ o_id = None
 
 def index(request, id=None):
     global o_id
+
     shiftOrder(Pending_Order)
     
     
@@ -26,8 +27,7 @@ def index(request, id=None):
     if id:
         o_id = None
 
-    
-    # print(news)
+    updateModels()
     return render(request, 'index.html', {
         "slides": slides,
         "news":news,
@@ -201,6 +201,20 @@ def formatCart(cart:dict):
         to_return += f"\n{str(key).capitalize()}: '{value}'"
     
     return to_return
+
+
+def updateModels():
+    global slides, news, top_products, sug_products, new_products, cat,imgs, o_id
+
+    slides = Banner.objects.all()
+    news = News.objects.all().first()
+    top_products = Product.objects.filter(on_top_product=True)
+    sug_products = Product.objects.all()
+    new_products = Product.objects.filter(tag="New")
+    cat = Category.objects.all()
+    imgs = ProductImagery.objects.all()
+    o_id = None
+
 
 #  ---------------- Non rendering functions ----------
 
